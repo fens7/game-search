@@ -1,11 +1,12 @@
-import { HStack, Image, Text } from '@chakra-ui/react';
+import { HStack, Image } from '@chakra-ui/react';
 import Logo from '../assets/logo1.png';
+import ThemeSwitch from './ThemeSwitch';
 
 function NavBar() {
     return (
-        <HStack>
+        <HStack justifyContent="space-between">
             <Image src={Logo} boxSize="60px" />
-            <Text margin="0">Search games to play</Text>
+            <ThemeSwitch />
         </HStack>
     );
 }
