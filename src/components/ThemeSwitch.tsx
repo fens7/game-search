@@ -10,7 +10,7 @@ function ThemeSwitch() {
                 onChange={toggleColorMode}
                 colorScheme="blue"
             />
-            <Text margin="0">Dark Mode</Text>
+            <Text margin="0" marginRight='10px'>Dark Mode</Text>
         </HStack>
     );
 }
