@@ -8,12 +8,14 @@ import PlatformSelector from './components/PlatformSelector';
 import { Platform } from './hooks/useGames';
 import SortSelector from './components/SortSelector';
 
+export interface GameQuery {
+    genre: Genre | null;
+    platform: Platform | null;
+    sortBy: string;
+}
+
 function App() {
-    const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
-    const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null);
-
-    console.log(selectedPlatform);
-
+    const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
     return (
         <>
             <Grid
@@ -31,25 +33,27 @@ function App() {
                 <Show above="lg">
                     <GridItem area="aside" paddingX={5}>
                         <GenreList
-                            setSelectedGenre={(genre) => setSelectedGenre(genre)}
-                            selectedGenre={selectedGenre}
+                            setSelectedGenre={(genre) =>
+                                setGameQuery({ ...gameQuery, genre })
+                            }
+                            selectedGenre={gameQuery.genre}
                         />
                     </GridItem>
                 </Show>
                 <GridItem area="main">
                     <HStack spacing={5} paddingLeft={4} marginBottom={5}>
                         <PlatformSelector
-                            selectedPlatform={selectedPlatform}
+                            selectedPlatform={gameQuery.platform}
                             setSelectedPlatform={(platform) =>
-                                setSelectedPlatform(platform)
+                                setGameQuery({ ...gameQuery, platform })
                             }
                         />
-                        <SortSelector />
+                        <SortSelector
+                            sort={gameQuery.sortBy}
+                            setSortBy={(sortBy) => setGameQuery({ ...gameQuery, sortBy })}
+                        />
                     </HStack>
-                    <GameGrid
-                        selectedPlatform={selectedPlatform}
-                        selectedGenre={selectedGenre}
-                    />
+                    <GameGrid gameQuery={gameQuery} />
                 </GridItem>
             </Grid>
         </>
