@@ -3,11 +3,15 @@ import Logo from '../assets/logo1.png';
 import ThemeSwitch from './ThemeSwitch';
 import SearchInput from './SearchInput';
 
-function NavBar() {
+interface Props {
+    onSearch: (searchText: string) => void;
+}
+
+function NavBar({ onSearch }: Props) {
     return (
         <HStack justifyContent="space-between" padding="10px">
             <Image src={Logo} boxSize="60px" />
-            <SearchInput />
+            <SearchInput onSearch={onSearch} />
             <ThemeSwitch />
         </HStack>
     );
